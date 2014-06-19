@@ -18,7 +18,7 @@
 /tmp/sessions
 /tmp/sockets
 
-
+/Capfile
 /secret_token
 /config/database.yml
 
@@ -65,3 +65,4 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
