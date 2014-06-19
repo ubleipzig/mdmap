@@ -1,0 +1,69 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = Edition
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+
+= link_to t('.new', :default => t("helpers.links.new")), new_edition_path, :class => 'btn btn-primary'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:marc_record_id)
+      %th= model_class.human_attribute_name(:best_match_id)
+      %th= model_class.human_attribute_name(:oclc)
+      %th= model_class.human_attribute_name(:xoclc)
+      %th= model_class.human_attribute_name(:finc)
+      %th= model_class.human_attribute_name(:perseus)
+      %th= "Created"
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @editions.each do |edition|
+      %tr
+        %td= link_to edition.id, edition_path(edition)
+        %td= edition.name
+        %td
+          - if edition.marc_record_id
+            = link_to MarcRecord.find(edition.marc_record_id) do
+              %span.label.label-info.oclc= MarcRecord.find(edition.marc_record_id).id
+        %td
+          - if edition.best_match_id
+            = link_to MarcRecord.find(edition.best_match_id) do
+              %span.label.label-info.oclc= MarcRecord.find(edition.best_match_id).id
+        %td
+          - if edition.oclc_id
+            = link_to Oclc.find(edition.oclc_id) do
+              %span.label.label-info.oclc= Oclc.find(edition.oclc_id).number
+        %td
+          - Xoclc.where(:edition_id => edition.id).each do |xoclc|
+            = link_to Oclc.find(xoclc.oclc_id) do
+              %span.label.label-info.oclc= Oclc.find(xoclc.oclc_id).number 
+        %td
+          - Finc.where(:edition_id => edition.id).each do |finc|
+            %span.label.label-info.oclc= FincRecord.find(finc.finc_record_id).id 
+        %td
+          - PerseusRecord.where(:edition_id => edition.id).each do |perseus|
+            %span.label.label-info.oclc= perseus.id
+        %td= time_ago_in_words(edition.created_at) + " ago"
+        %td
+          .palette.palette-peter-river
+            = link_to t('.map', :default => t("helpers.links.map")), map_edition_path(edition), :class => 'btn btn-mini btn-success'
+            = link_to 'Run xOclc', '#', :class => 'btn btn-mini runXOclc', :data => { :path => edition_path(edition) }
+            = link_to 'Run finc', '#', :class => 'btn btn-mini runFinc', :data => { :path => edition_path(edition) }
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_edition_path(edition), :class => 'btn btn-mini'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), edition_path(edition), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+

@@ -1,0 +1,45 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = PerseusRecord
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %h2= model_class.human_attribute_name(:id) + ': ' + @perseus_record.id.to_s
+%p
+  %h2
+    = "URN:"
+    = link_to @perseus_record.urn, "http://catalog.perseus.org/catalog/" + URI.encode( @perseus_record.urn )
+
+-if @perseus_record.edition_id
+  %p
+    %h2
+      = "Edition:"
+      = link_to @perseus_record.edition_id, edition_path(@perseus_record.edition_id)
+
+%p
+  -if @perseus_record.marc_record_id
+    %h2
+      =model_class.human_attribute_name(:marc_record_id) + ': '
+      = link_to @perseus_record.marc_record_id.to_s, marc_record_path(@perseus_record.marc_record_id)
+
+%p
+  != CodeRay.scan(@perseus_record.mods, :xml).div()
+
+  .form-actions
+    = link_to t('.back', :default => t("helpers.links.back")), perseus_records_path, :class => 'btn'
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_perseus_record_path(@perseus_record), :class => 'btn'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), perseus_record_path(@perseus_record), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

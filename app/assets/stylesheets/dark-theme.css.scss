@@ -1,0 +1,95 @@
+/*Copyright 2014 Library of Billion Words, Leipzig University
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.*/
+
+// colors
+$wet_asphalt: #34495E;
+$midnight_blue: #2C3E50;
+$lighter_blue: #395168;
+$clouds: #ECF0F1;
+$green_sea: #16A085;
+$asbestos: #7F8C8D;
+$concrete: #95A5A6;
+
+body {
+
+	thead {
+		background-color: $wet_asphalt;
+	}
+
+	.table th, .table td {
+		border-top: 1px solid $midnight_blue;
+		border-right: 1px solid $midnight_blue;
+	}
+
+	.map input, #map_filter input, .addRow {
+		background-color: $midnight_blue;
+		color: $clouds;
+	}
+
+	.label, .badge {
+		color: $asbestos;
+		background-color: $clouds;
+		text-shadow: none;
+		&.label-success {
+			background-color: #468847;
+			color: white;
+		}
+	}
+
+	.progress {
+		background-color: $concrete;
+		background-image: none;
+	}
+
+	background-color: $midnight_blue;
+	color: $clouds;
+
+	.table th, .table td {
+		// border-top-color: $asbestos;
+		// border-top-color: none !important;
+	}
+
+	.navbar {
+		.brand {
+			text-shadow: none;
+		}
+		.navbar-inner {
+			background-color: $lighter_blue;
+			background-image: none;
+			.nav > li > a {
+				text-shadow: none;
+			}
+		}
+	}
+	.table-striped tbody > tr:nth-child(even) > td, .table-striped tbody > tr:nth-child(even) > th {
+		background-color: $wet_asphalt;
+	}
+
+	.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+		background-color: $lighter_blue;
+	}
+
+	.form-actions {
+		background-color: $wet_asphalt;
+		border-top-color: $asbestos;
+	}
+
+	.page-header {
+		border-bottom-color: $asbestos;
+	}
+
+	pre {
+		line-height: 15px;
+	}
+}

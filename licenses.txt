@@ -1,0 +1,32 @@
+Oclcmap:
+| Bootstrap| MIT|
+| Codemirror| MIT|
+| Coderay | MIT|
+| Flat UI | MIT|
+| HAML | MIT|
+| jQuery | MIT|
+| Less | Apache 2|
+| Nokogiri| MIT|
+| ruby-marc| MIT|
+| Sass | MIT|
+| Solr | Apache 2|
+| SQLite | Public domain|
+| Sunspot | MIT|
+
+
+Proteus:
+	Eclipse Public License (EPL)
+
+==EPL==
+* So folgt auch die EPL dem Copyleft-Prinzip, ist laut Braun aber im Vergleich zur GPL trennschärfer. Die Bearbeitung und Übernahme von EPL-geschütztem Code bleibt Copyleft. Alles andere, was in eigenen Dateien enthalten ist, fällt nicht darunter. So lassen sich zusammengestellte Produkte zum Beispiel mit Eclipse-Plug-ins erstellen und unter einer eigenen Lizenz vertreiben, wobei nur der von Eclipse übernommene Code den Copyleft-Regelungen unterliegt.
+
+Die in vielerlei Hinsicht für Anwender sorgenfreieste Variante ist laut Braun die Apache License, die keine Copyleft-Regelung enthält: Apache stellt Open-Source-Code zur Verfügung und erlaubt es, sämtliche Modifikationen daran auch unter einer eigenen Lizenz weiterzugeben. Auch hier müssen allerdings einige Bedingungen eingehalten werden, unter anderem, dass der Ersteller der Software und die Apache Foundation nicht haften und die bestehenden Urheberrechtsvermerke auch im modifizierten Programm enthalten sein müssen
+
+http://www.computerwoche.de/a/java-gemeinde-setzt-hohe-erwartungen-in-oracle,1897589,4
+
+---
+Must Include License
+
+Including the full text of license in modified software.
+
+https://tldrlegal.com/license/eclipse-public-license-1.0-%28epl-1.0%29

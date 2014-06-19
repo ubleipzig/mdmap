@@ -1,0 +1,48 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = Oclc
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = link_to 'get MarcXML for all', '#', :class => 'btn btn-mini getAllMarcXml'
+  .progress.progress-striped.active
+    .bar{style: "width: 0%;"}
+
+= link_to t('.new', :default => t("helpers.links.new")), new_oclc_path, :class => 'btn btn-primary'
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:number)
+      %th= model_class.human_attribute_name(:marc_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @oclcs.each do |oclc|
+      %tr
+        %td= oclc.id
+        %td= oclc.number
+        %td.marc
+          -if oclc.marc_record_id
+            =link_to marc_record_path(oclc.marc_record_id) do
+              %span.label.label-info.marc= oclc.marc_record_id
+          -else
+            %a.marc
+              %span.label.label-info.marc
+
+        %td=l oclc.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_oclc_path(oclc), :class => 'btn'
+          = link_to 'MarcXML', '#', :class => 'btn getMarcXml', :data => { :path => oclc_path(oclc) }
+

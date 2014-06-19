@@ -1,0 +1,288 @@
+/*Copyright 2014 Library of Billion Words, Leipzig University
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.*/
+
+// Place all the styles related to the editions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// colors: http://flatuicolors.com/
+$green_sea: #16A085;
+$turquoise: #1abc9c;
+$wet_asphalt: #34495E;
+$midnight_blue: #2C3E50;
+$asbestos: #7F8C8D;
+$belize_hole: #2980B9;
+$carrot: #e67e22; //orange
+$pumpkin: #d35400; //dark orange
+$orange: #f39c12; // dark yellow
+$sun_flower: #f1c40f; // yellow
+
+td, .progress-bar:hover {
+	-webkit-transition: all 0.3s ease;
+	    -moz-transition: all 0.3s ease;
+	    -o-transition: all 0.3s ease;
+	    transition: all 0.3s ease;
+	    	
+}
+
+tr.hover td {
+		-webkit-transition: all 0 ease;
+		    -moz-transition: all 0 ease;
+		    -o-transition: all 0 ease;
+		    transition: all 0 ease;
+}
+
+body .table-striped tbody {
+	
+
+	& > tr:nth-child(odd) > td {
+		&.finc {
+			background-color: #3b3954;
+		}
+		&.selected {
+			background-color: $green_sea;
+		}
+	}
+	& tr:nth-child(even) > td {
+		&.finc {
+			background-color: #181549;
+		}
+		&.selected {
+			background-color: darken($green_sea, 5%);
+		}
+	}
+}
+
+.progress {
+  background: #ebedef;
+  border-radius: 32px;
+  height: auto;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.progress-bar {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.progress-bar-warning {
+  background-color: #f1c40f;
+}
+.progress-bar-danger {
+  background-color: #e74c3c;
+}
+.progress-bar-info {
+  background-color: #3498db;
+}
+// .progress-bar-info.progress-bar-success {
+//   background-color: #000;
+// }
+
+.progress {
+  // height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px $asbestos;
+          box-shadow: inset 0 1px 2px $asbestos;
+}
+
+.progress-bar {
+  // background-color: $orange;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  // border-bottom-color: $asbestos;
+  border-bottom-color: $sun_flower;
+  border-bottom-style: solid;
+  float: left;
+  width: 33px;
+  height: 50px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  outline: 3px solid #7f8c8d;
+  outline-offset: 0px;
+  &:hover, &.progress-bar-info {
+  	background-color: $belize_hole;
+  	border-color: $midnight_blue;
+  }
+
+  // border-right: 1px solid #ddd;
+
+  // -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+          // box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 0 #ddd;
+  -webkit-box-shadow: 1px 0 $asbestos;
+  -webkit-transition: width 0.6s ease;
+          transition: width 0.6s ease;
+}
+
+.progress-bar-success {
+  // background-color: $turquoise;
+  border-bottom-color: $green_sea;
+
+  outline: 3px solid #7f8c8d;
+  outline-offset: 0px
+}
+
+.progress-striped .progress-bar {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px;
+}
+
+.progress.active .progress-bar {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+          animation: progress-bar-stripes 2s linear infinite;
+}
+
+.progress-striped .progress-bar-success {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-info {
+  background-color: $belize_hole;
+}
+
+.progress-striped .progress-bar-info {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-warning {
+  background-color: #f0ad4e;
+}
+
+.progress-striped .progress-bar-warning {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-danger {
+  background-color: #d9534f;
+}
+
+.progress-striped .progress-bar-danger {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+
+.map {
+	table-layout:fixed;
+
+	td, th {
+		input {
+			border-radius: 3px;
+			width: 145px;
+		}
+		// width: 114px;
+		&.input {
+			width: 134px !important;
+		}
+		&.key {
+			background-color: $asbestos !important;
+			width: 43px !important;
+		}
+		&.stats {
+			width: 58px !important;
+			vertical-align: bottom;
+		}
+	.highlight {
+		background-color: #f1c40f !important;
+		}
+	}
+
+	td {
+		padding: 2px;
+		position: relative;
+		overflow: hidden;
+		// &.selected {
+		// 	background: $green_sea !important;
+		// }
+		.value {
+			height: 56px;
+			overflow: hidden;
+			word-wrap: break-word;
+		}
+		.triangle {
+			border-bottom: 6px solid transparent;
+			border-left: 6px solid #bdc3c7;
+			border-top: 6px solid transparent;
+			bottom: -4px;
+			right: -1px;
+			height: 0;
+			position: absolute;
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+			width: 0;
+		}
+
+		.statbar {
+			float:left;
+			width:11px;
+			// height:40px;
+			border-bottom-color: $asbestos;
+			color: #ecf0f1;
+			border-bottom-style: solid;
+			box-sizing: border-box;
+			margin: 0 3px 0 0;
+			text-align: center;
+			font-size: 10px;
+			&:hover {
+				border-bottom-color: $sun_flower;
+				color: #fff;
+				cursor: pointer;
+			}
+			&.hover {
+				border-bottom-color: $sun_flower;
+			}
+		}
+
+		&.hover {
+			background-color: $sun_flower !important;
+			color: $midnight_blue !important;
+		}
+	}
+
+	th {
+		background-color: $wet_asphalt;
+		border-bottom: 3px solid #000;
+		.handle {
+			background-image: url("/images/dragtable/handle.png");
+			background-repeat: repeat-x;
+			height: 18px;
+			margin: 0px 1px;
+			cursor: move;
+		}
+		&.finc {
+			background-color: darken(#181549, 5%);
+		}
+	}
+
+	.metaData {
+				cursor: pointer;
+			}
+
+	.label {
+		height: 39px;
+	}
+}

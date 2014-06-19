@@ -1,0 +1,43 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = MarcRecord
+.page-header
+  %h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"
+
+%h2 Import MarcFile
+= form_tag import_marc_records_path, multipart: true do
+  .control-group
+    .controls
+      = file_field_tag :file
+      = submit_tag "Import", :class => "btn"
+
+%h2 From Archive-Org-Identifier
+= form_tag("/marc_records/archiveOrgId", method: "get") do |f|
+  .controls
+    = label_tag :q, "ArchiveOrg Identifier:"
+    = text_field_tag :q
+    = submit_tag "Search", :class => "btn"
+
+%h2 From finc-Identifier
+= form_tag("/marc_records/fincId", method: "get") do |f|
+  .controls
+    = label_tag :q, "finc Identifier:"
+    = text_field_tag :q
+  .control-group
+    = label_tag :edition_id, "Edition"
+    .controls
+      = collection_select(:finc, :edition_id, Edition.all, :id, :id, {:prompt => true} )
+    = submit_tag "Search", :class => "btn"  

@@ -1,0 +1,36 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = Edition
+%center
+  .page-header{:style => "border-bottom: 0px solid white; margin-top: 50px;"}
+    %h1{:style => "font-size: 50px;"} Oclcmap
+
+  %p
+    =link_to 'Show Editions', 'editions', :class => "btn btn-lg"
+  %p
+    =link_to 'Create New Edition', 'editions/new', :class => "btn btn-lg"
+  %p
+    =link_to 'Add/Import/Search MARC-XML Record', 'marc_records/new', :class => "btn btn-lg"
+  %p
+    =link_to 'Import MARC-XML-Record with OCLC ID', 'oclcs/new', :class => "btn btn-lg"
+  %p
+    =link_to 'Import MARC-XML-Record with Perseus URN', 'perseus_records/new', :class => "btn btn-lg"
+
+    
+
+%script{:type => "text/javascript"}
+  != "$('body').css('background', 'url(http://www.uni-leipzig.de/~gfm2008/fileadmin/img/PB_Albertina_Lesesaal.jpg) no-repeat center center fixed');"
+  != "$('body').css('background-size', 'cover');"
+  != "$('body').css('background-color', '#2c3e50');"

@@ -1,0 +1,6 @@
+MarcRecord-on-save => make fingerprints with { "041|0 |ax" => [ [a, y] [b, x] ] }
+
+rowKeys = maxArray( MarcRecords.allKeys ) # in Edition.rb
+
+ey  for key 
+  print row with MarcRecord.fingerprint[uniqkey][

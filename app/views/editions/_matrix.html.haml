@@ -1,0 +1,99 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- records = @edition.getRecords
+- rowKeys = @edition.getRowKeys(records)
+
+/ pre-load marc records in a hash
+- marcRecords = {}
+- for marc_record_id in records
+  - m = MarcRecord.find(marc_record_id[0])
+  - marcRecords[marc_record_id[0]] = m
+
+%table.table.table-striped.map#map{:data => {:sources => records.length} }
+  %thead
+    %tr
+      %th.input
+        %h5 Value
+      %th.key
+        %h5 Field
+      %th.stats
+        %h5 Stats
+      - for marcId in records
+        %th{:class => [marcId[0].to_s, marcId[1]], :data => {:source => marcId[2], "marc-record" => marcId[0].to_s}}
+          %span.badge
+            = '#'
+            = marcId[0].to_s
+          %span.source{:title => 'source'}
+            = marcId[2]
+  %tbody
+    %form.form
+      -# add rows for every key
+      - rowKeys.uniq.each do |uniqKey|
+        - # add n rows for every instance of identical key (calculated with maxArray)
+        - (rowKeys - (rowKeys - [uniqKey])).each_with_index do |sameKey, i|
+          - field = sameKey.split("|")[0]
+          - inds = sameKey.split("|")[1]
+          - if inds.is_a? String
+            - ind1, ind2 = inds[0], inds[1]
+          - else
+            - ind1, ind2 = "", ""
+          %tr{:data => {:checked => "false", :key => sameKey, :number => (i+1).to_s, :field => field, :ind1 => ind1, :ind2 => ind2}}
+            - subfields = sameKey.split("|")[2..-1]
+            %td.input{:data => {:field => field, :ind1 => ind1, :ind2 => ind2}}
+              %div
+                %fieldset
+                  - if subfields.is_a? Array
+                    - subfields.each_with_index do |subfield, j|
+                      %br
+                      %input.text_field.value{:data => {:key => sameKey, :field => sameKey.split("|")[0], :subfield => subfield, :number => (i+1)}, :type => 'text', :name => sameKey, :style => "height: inherit; padding-left: 2px; padding:0px; border-width:0px; margin: 0px; font-size:12px;"}
+                  - else
+                    %br
+                    %input.text_field.value{:data => {:key => sameKey, :subfield => "", :number => 1}, :style => "height: inherit; padding-left: 2px; padding:0px; border-width:0px; margin: 0px; font-size:12px;"}
+            %td.key
+              %strong
+                = sameKey.split("|")[0]
+              - if inds.is_a? String
+                - inds.each_char do |ind|
+                  - if ind == " "
+                    = "_"
+                  -else
+                    = ind
+              - if subfields.is_a? Array
+                - subfields.each_with_index do |subfield, j|
+                  %br
+                  %span{:data => {:key => sameKey, :subfield => j, :number => (i+1)}}
+                    = "$" + subfield
+            %td.stats
+            - for marc_record_id in records
+              - m = marcRecords[marc_record_id[0]]
+              - if m.fingerprintHash[sameKey]
+                - val = ( val = m.fingerprintHash[sameKey][i] ) ? val : ""
+              - else
+                - val = ""
+              - tooltip = ""
+
+              - indicators = sameKey.split("|")[1]
+              - ind1 = (indicators.is_a? String) ? indicators[0] : " "
+              - ind2 = (indicators.is_a? String) ? indicators[1] : " "
+              - ind1 = "_"
+
+              - long = val.length > threshold
+              - tooltip = val
+              %td{:data => { :value => val, "marc-record" => marc_record_id[0].to_s, :key => sameKey, :number => (i+1).to_s, :source => marc_record_id[2] , :ind1 => ind1, :ind2 => ind2 }, :class => marc_record_id[1], :title => tooltip, :style => "white-space: nowrap;"}
+                - unless val.is_a? String
+                  - val.each_with_index do |value, j|
+                    %br
+                    %span{:data => {:key => sameKey, :number => (i+1), :value => value}}
+                      = value

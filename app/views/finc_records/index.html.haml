@@ -1,0 +1,51 @@
+/ Copyright 2014 Library of Billion Words, Leipzig University
+/
+/ Licensed under the Apache License, Version 2.0 (the "License");
+/ you may not use this file except in compliance with the License.
+/ You may obtain a copy of the License at
+/
+/     http://www.apache.org/licenses/LICENSE-2.0
+/
+/ Unless required by applicable law or agreed to in writing, software
+/ distributed under the License is distributed on an "AS IS" BASIS,
+/ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/ See the License for the specific language governing permissions and
+/ limitations under the License.
+
+- model_class = FincRecord
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:url)
+      %th= model_class.human_attribute_name(:marc_record_id)
+      %th= model_class.human_attribute_name(:edition_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @finc_records.each do |record|
+      %tr
+        %td= link_to record.id, finc_record_path(record)
+        %td= record.url
+        %td.marc
+          -if record.marc_record_id
+            =link_to marc_record_path(record.marc_record_id) do
+              %span.label.label-info.marc= record.marc_record_id
+          -else
+            %a.marc
+              %span.label.label-info.marc
+        %td
+          -if (f = Finc.find_by :finc_record_id => record.id)
+            =link_to edition_path(f.edition_id) do
+              %span.label.label-info= f.edition_id unless f.edition_id == 0
+          -else
+            %a
+              %span.label.label-info
+        %td=l record.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_finc_record_path(record), :class => 'btn'
+
