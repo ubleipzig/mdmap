@@ -12,6 +12,9 @@
 / See the License for the specific language governing permissions and
 / limitations under the License.
 
+/ get root path from config
+- r = Oclcmap::Application.config.action_controller.relative_url_root.to_s
+
 !!! 5
 %html(lang="en")
   %head
@@ -31,12 +34,12 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
 
-    = javascript_include_tag "/datatables/jquery.dataTables.min.js"
+    = javascript_include_tag (r + "/datatables/jquery.dataTables.min.js")
     / = javascript_include_tag "/datatables/ColReorder.js"
     = javascript_include_tag "http://code.jquery.com/jquery-migrate-1.2.1.js"
-    = javascript_include_tag "/datatables/FixedColumns.js"
-    = javascript_include_tag "/keyTable/js/dataTables.keyTable.js"
-    = javascript_include_tag "/jquery.highlight-4.js"
+    = javascript_include_tag (r + "/datatables/FixedColumns.js")
+    = javascript_include_tag (r + "/keyTable/js/dataTables.keyTable.js")
+    = javascript_include_tag (r + "/jquery.highlight-4.js")
     / = javascript_include_tag "/datatables/FixedHeader.js"
 
 
@@ -48,17 +51,18 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="/") Oclcmap
+          .brand= link_to 'Oclcmap', r + "/"
+
           .container.nav-collapse
             %ul.nav
               %li
-                = link_to "Editions (" + Edition.all.size.to_s + ")", "/editions"
+                = link_to "Editions (" + Edition.all.size.to_s + ")", (r + "/editions")
                 %span.navbar-unread= "1"
-              %li= link_to "Marc Records (" + MarcRecord.all.size.to_s + ")", "/marc_records"
-              %li= link_to "OCLC IDs (" + Oclc.all.size.to_s + ")", "/oclcs"
-              %li= link_to "xOCLC Relations (" + Xoclc.all.size.to_s + ")", "/xoclcs"
-              %li= link_to "Finc Records (" + FincRecord.all.size.to_s + ")", "/finc_records"
-              %li= link_to "Perseus Records (" + PerseusRecord.all.size.to_s + ")", "/perseus_records"
+              %li= link_to "Marc Records (" + MarcRecord.all.size.to_s + ")", (r + "/marc_records")
+              %li= link_to "OCLC IDs (" + Oclc.all.size.to_s + ")", (r + "/oclcs")
+              %li= link_to "xOCLC Relations (" + Xoclc.all.size.to_s + ")", (r + "/xoclcs")
+              %li= link_to "Finc Records (" + FincRecord.all.size.to_s + ")", (r + "/finc_records")
+              %li= link_to "Perseus Records (" + PerseusRecord.all.size.to_s + ")", (r + "/perseus_records")
 
     .container
 
@@ -78,4 +82,4 @@
       %footer.navbar-bottom{ :style =>"height: 80px; margin-top: 50px; background-color: transparent;"}
         .container
           .row
-            %img{ :src => "/images/esf/logo.jpg", :style =>"padding-top: 5px;" }
+            %img{ :src => (r + "/images/esf/logo.jpg"), :style =>"padding-top: 5px;" }
