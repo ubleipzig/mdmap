@@ -14,7 +14,6 @@
 
 Oclcmap::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -27,6 +26,9 @@ Oclcmap::Application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Tell application we use proxy (virtual subdir)
+  config.action_controller.relative_url_root = '/mdmt/'
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
