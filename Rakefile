@@ -19,4 +19,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Oclcmap::Application.load_tasks
+Mdmap::Application.load_tasks

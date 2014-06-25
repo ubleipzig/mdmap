@@ -16,6 +16,6 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
-Oclcmap::Application.initialize!
+Mdmap::Application.initialize!
 
 require 'coderay'

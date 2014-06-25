@@ -14,4 +14,4 @@
 
 # Be sure to restart your server when you modify this file.
 
-Oclcmap::Application.config.session_store :cookie_store, key: '_oclcmap_session'
+Mdmap::Application.config.session_store :cookie_store, key: '_mdmap_session'

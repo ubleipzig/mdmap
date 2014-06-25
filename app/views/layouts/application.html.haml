@@ -12,16 +12,13 @@
 / See the License for the specific language governing permissions and
 / limitations under the License.
 
-/ get root path from config
-- @r = Oclcmap::Application.config.action_controller.relative_url_root.to_s
-
 !!! 5
 %html(lang="en")
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "Oclcmap"
+    %title= content_for?(:title) ? yield(:title) : "Mdmap"
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -34,12 +31,12 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
 
-    = javascript_include_tag (@r + "/datatables/jquery.dataTables.min.js")
+    = javascript_include_tag "/datatables/jquery.dataTables.min.js"
     / = javascript_include_tag "/datatables/ColReorder.js"
     = javascript_include_tag "http://code.jquery.com/jquery-migrate-1.2.1.js"
-    = javascript_include_tag (@r + "/datatables/FixedColumns.js")
-    = javascript_include_tag (@r + "/keyTable/js/dataTables.keyTable.js")
-    = javascript_include_tag (@r + "/jquery.highlight-4.js")
+    = javascript_include_tag "/datatables/FixedColumns.js"
+    = javascript_include_tag "/keyTable/js/dataTables.keyTable.js"
+    = javascript_include_tag "/jquery.highlight-4.js"
     / = javascript_include_tag "/datatables/FixedHeader.js"
 
 
@@ -51,7 +48,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          .brand= link_to 'Oclcmap', root_path
+          .brand= link_to 'Mdmap', root_path
 
           .container.nav-collapse
             %ul.nav
@@ -82,4 +79,4 @@
       %footer.navbar-bottom{ :style =>"height: 80px; margin-top: 50px; background-color: transparent;"}
         .container
           .row
-            %img{ :src => (@r + "/images/esf/logo.jpg"), :style =>"padding-top: 5px;" }
+            = image_tag "/images/esf/logo.jpg"
