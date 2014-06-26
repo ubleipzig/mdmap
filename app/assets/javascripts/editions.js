@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function save_edition(edition_id, exit, ajax_url) {
+function save_edition(edition_id, exit, ajax_url, editions_url) {
 
   // creating following json-structure:
   // http://bit.ly/1lhJbrR
@@ -75,7 +75,7 @@ function save_edition(edition_id, exit, ajax_url) {
     dataType: "JSON"
   }).success(function(json) {
     if (exit) {
-      window.location.href = '/editions';
+      window.location.href = editions_url;
     }
     else {
       window.location.reload();
@@ -325,7 +325,8 @@ $(function() {
     edition_id = $(this).data("edition-id");
     exit = true;
     var ajax_url = $(this).attr("ajax_path");
-    save_edition(edition_id, exit, ajax_url);
+    var editions_url = $(this).attr("editions_path");
+    save_edition(edition_id, exit, ajax_url, editions_url);
   });
 
   // go to table row when clicking on progress-bar
