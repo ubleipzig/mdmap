@@ -25,14 +25,14 @@
       = submit_tag "Import", :class => "btn"
 
 %h2 From Archive-Org-Identifier
-= form_tag("/marc_records/archiveOrgId", method: "get") do |f|
+= form_tag(archiveOrgId_marc_records_path, method: "get") do |f|
   .controls
     = label_tag :q, "ArchiveOrg Identifier:"
     = text_field_tag :q
     = submit_tag "Search", :class => "btn"
 
 %h2 From finc-Identifier
-= form_tag("/marc_records/fincId", method: "get") do |f|
+= form_tag(fincId_marc_records_path , method: "get") do |f|
   .controls
     = label_tag :q, "finc Identifier:"
     = text_field_tag :q
