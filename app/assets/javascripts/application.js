@@ -19,6 +19,7 @@
 //= require_tree .
 //= require flat-ui
 //= require jquery.ui.all
+// = require js-routes
 
 $(document).ready(function(){
 	
