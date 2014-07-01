@@ -34,7 +34,7 @@ function save_edition(edition_id, exit, ajax_url, editions_url) {
     var isEmpty = true;
 
     // control field
-    if(isControlField && $(this).find("input.text_field").val() !== ""){
+    if (isControlField && $(this).find("input.text_field").val() !== "") {
       var val = $(this).find("input.text_field").val();
       hash = {};
       hash[field] = val;
@@ -45,9 +45,9 @@ function save_edition(edition_id, exit, ajax_url, editions_url) {
       var ind1 = $(this).data("ind1").toString();
       var ind2 = $(this).data("ind2").toString();
       var subfields = [];
-      $(this).find("input.text_field").each(function(k){
-      var subfieldHash = {};
-      // only store fields that are not empty
+      $(this).find("input.text_field").each(function(k) {
+        var subfieldHash = {};
+        // only store fields that are not empty
         if ($(this).val() !== "") {
           isEmpty = false;
 
@@ -74,7 +74,7 @@ function save_edition(edition_id, exit, ajax_url, editions_url) {
 
   ajaxHash = {};
   ajaxHash["marcHash"] = JSON.stringify(marcHash);
-  
+
   $.ajax({
     url: ajax_url,
     data: ajaxHash,
@@ -83,8 +83,7 @@ function save_edition(edition_id, exit, ajax_url, editions_url) {
   }).success(function(json) {
     if (exit) {
       window.location.href = editions_url;
-    }
-    else {
+    } else {
       window.location.reload();
     }
   });
@@ -107,7 +106,7 @@ function sortHash(hash) {
   for (var key in hash) {
     sortable.push([key, hash[key]]);
   }
-  return sortable.sort( function(a, b) {
+  return sortable.sort(function(a, b) {
     return b[1] - a[1];
   });
 }
@@ -197,17 +196,7 @@ $(function() {
     "sScrollY": "680px",
     "bSort": false,
     "bScrollCollapse": true
-    // ,"oColReorder": {
-    //              "iFixedColumns": 2
-    //          }
   });
-
-  // navigation with keys
-  // not working
-  // var keys = new KeyTable( {
-  //  "table": document.getElementById('map'),
-  //  "datatable": oTable
-  // } );
 
   // two fixed columns
   new FixedColumns(oTable, {
@@ -225,7 +214,6 @@ $(function() {
     var number = $(parent).data("number");
     var val = $(parent).attr("title");
     appendProgressBar(key, number, field);
-    // $(".progress").append("<div class='progress-bar' data-key='"+key+"' data-number='"+number+"' title='"+title+"'>"+key+"</div>");
   });
 
   // enable tooltip for long strings, progress-bar and input fields
@@ -358,32 +346,6 @@ $(function() {
       scrollTop: scroll
     }, 'fast');
   });
-  // add row
-  // $('.addRow').keydown(function(e) {
-  //   if (e.keyCode == 13) {
-  //     var key = $(this).val();
-  //     number = $("tbody:first").find("tr[data-key='" + key + "']").length + 1;
-  //     $(this).val("");
-  //     $("tbody").each(function() {
-  //       var tr = $(this).find("tr").eq(-2).clone();
-  //       tr.find(".label .badge").text(key);
-  //       tr.attr("data-key", key);
-  //       tr.find("input").attr("data-key", key);
-  //       tr.attr("data-number", number);
-  //       tr.find("input").attr("data-number", number);
-  //       tr.find("input").val("");
-  //       tr.find("input").attr("name", key);
-  //       tr.find(".metaData").remove();
-  //       $(this).find("tr:last").after(tr);
-  //       scroll = getScrollValue(tr);
-  //       tr.find("input:first").focus();
-  //       $(".dataTables_scrollBody").animate({
-  //         scrollTop: scroll
-  //       }, 'fast');
-  //     });
-  //     appendProgressBar(key, number, "[" + key + "]");
-  //   }
-  // });
 
   // add statistics
   $(".DTFC_LeftWrapper tr").each(function() {
@@ -413,31 +375,4 @@ $(function() {
       $(stats).append(div);
     }
   });
-
-  //////
-  // add row - not really working yet
-  /////
-  // $(".progress").after('<input class="newKey" type="text" placeholder="Add Field" style="background: url(/images/todo/done.png) no-repeat 96%;"><div class="addRow" style="position: relative;top: -40px;left: 177px;width: 20px;height: 20px;margin: 0px;padding: 0px;cursor:pointer;"></div>');
-
-  // $("body").on("click", ".addRow", function(){
-  //  // clone next-to-last row
-  //  var row = new Array(2);
-  //  var key = $(".newKey").val();
-  //  row[0] = $(".DTFC_Cloned tr").eq(-2).clone();
-  //  row[0].find(".label").text(key);
-  //  row[0].find("input").val("");
-  //  row[1] = $(".dataTable tr").eq(-2).clone();
-  //  row[1].text("");
-
-  //  // add after last row
-  //  $(".DTFC_Cloned tr:last").after(row[0]);
-  //  $(".dataTable tr:last").after(row[1]);
-
-  //  // add progress bar
-  //  var key = $(this).data("key");
-  //  var number = $(this).data("number");
-  //  var val = $(this).attr("title");
-  //  title = "[" + key + "] " + val;
-  //  $(".progress").append("<div class='progress-bar' data-key='"+key+"' data-number='"+number+"' title='"+title+"'>"+key+"</div>");
-  // });
 });
