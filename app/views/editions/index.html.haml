@@ -68,7 +68,7 @@
         %td= time_ago_in_words(edition.created_at) + " ago"
         %td
           .palette.palette-peter-river
-            = link_to t('.map', :default => t("helpers.links.map")), map_edition_path(edition), :class => 'btn btn-mini btn-success'
+            = link_to 'Grid', map_edition_path(edition), :class => 'btn btn-mini map btn-success', :data => { :path => map_edition_path(edition) }
             = link_to 'Run xOclc', '#', :class => 'btn btn-mini runXOclc', :data => { :path => edition_path(edition) }
             = link_to 'Run finc', '#', :class => 'btn btn-mini runFinc', :data => { :path => edition_path(edition) }
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_edition_path(edition), :class => 'btn btn-mini'
