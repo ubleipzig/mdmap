@@ -121,8 +121,8 @@ body .table-striped tbody {
   color: #ffffff;
   text-align: center;
   cursor: pointer;
-  outline: 3px solid #7f8c8d;
-  outline-offset: 0px;
+  outline: 1px solid #7f8c8d;
+  outline-offset: -1px;
   &:hover, &.progress-bar-info {
   	background-color: $belize_hole;
   	border-color: $midnight_blue;
@@ -139,11 +139,11 @@ body .table-striped tbody {
 }
 
 .progress-bar-success {
-  // background-color: $turquoise;
-  border-bottom-color: $green_sea;
+  background-color: $green_sea;
+  border-bottom-color: $turquoise;
 
-  outline: 3px solid #7f8c8d;
-  outline-offset: 0px
+  outline: 1px solid #7f8c8d;
+  outline-offset: -1px
 }
 
 .progress-striped .progress-bar {
