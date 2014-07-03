@@ -285,28 +285,29 @@ $(function() {
   });
 
 
-  // when input value changed, remove 'selected class'
-  $('.map').on('keyup input paste change', 'input.value', function() {
-    var el = $(this);
-    var key = el.data("key");
-    var number = el.data("number");
-    var val = el.val();
-    el.attr("title", val);
-    $(".map").find("tr[data-key='" + key + "'][data-number='" + number + "'] td.selected").removeClass("selected");
-  });
-
   // highlight search result
   $("#map_filter").on('keyup input paste change', 'input', function() {
     $('#map').removeHighlight();
     $("#map").highlight($(this).val());
   });
 
-  // clicked on table row = progress
-  $(".map").on("click", "tr", function() {
+  // clicked on table cell = progress
+  $(".map").on("click", "td.metaData:not(.selected)", function() {
     var el = $(this);
     var key = el.data("key");
     var number = el.data("number");
     $(".progress-bar[data-key='" + key + "'][data-number='" + number + "']").addClass("progress-bar-success");
+  });
+
+  // changed input value = progress, remove 'selected class'
+  $( "input.value" ).change(function() {
+    var el = $(this);
+    var key = el.data("key");
+    var number = el.data("number");
+    var val = el.val();
+    el.attr("title", val);
+    $(".progress-bar[data-key='" + key + "'][data-number='" + number + "']").addClass("progress-bar-success");
+    $(".map").find("tr[data-key='" + key + "'][data-number='" + number + "'] td.selected").removeClass("selected");
   });
 
   $(".form-actions").on("click", ".save", function(evt) {
