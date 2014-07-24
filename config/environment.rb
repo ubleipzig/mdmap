@@ -26,3 +26,5 @@ require File.expand_path('../application', __FILE__)
 Mdmap::Application.initialize!
 
 require 'coderay'
+
+APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")
