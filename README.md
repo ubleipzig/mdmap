@@ -1,5 +1,7 @@
 # Mdmap
 
+A tool for collection, matching, and generation of bibliographic metadata.
+
 ## Getting started
 
 Install rails
