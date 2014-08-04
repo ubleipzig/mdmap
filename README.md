@@ -9,10 +9,20 @@ Then:
     bundle install
     rake db:migrate
     rails s
-    
+
+Create a *config/config.yml* file in your application. Add your (institution's) WSKey (https://oclc.org/developer/develop/authentication/what-is-a-wskey.en.html):
+
+<pre>
+wskey: yourKey
+</pre>  
+
+ 
+
 ## License
 
 Copyright 2014 Rico Simke, Leipzig University Library
+
+http://www.ub.uni-leipzig.de
 
 This code the result of the project "Die Bibliothek der Milliarden Wörter".
 This project is funded by the European Social Fund. "Die Bibliothek der
