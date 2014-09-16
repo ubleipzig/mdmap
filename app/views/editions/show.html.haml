@@ -33,7 +33,7 @@
   %strong= model_class.human_attribute_name(:best_match_id) + ':'
   %br
   - if @edition.best_match_id
-    = link_to Oclc.find(@edition.best_match_id).number, Oclc.find(@edition.best_match_id)
+    = link_to MarcRecord.find(@edition.best_match_id).number, MarcRecord.find(@edition.best_match_id)
 %p
   %strong= model_class.human_attribute_name(:marc_record_id) + ':'
   %br
