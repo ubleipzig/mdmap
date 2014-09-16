@@ -37,7 +37,7 @@ class Oclc < ActiveRecord::Base
 			require "open-uri"
 			serviceurl = "http://worldcat.org/webservices/catalog/content/"
 			wskey = APP_CONFIG['wskey']
-			url = serviceurl + self.number.to_s + "?wskey=" + key
+			url = serviceurl + self.number.to_s + "?wskey=" + wskey
 			marc_record = MarcRecord.create({:marc => open(url).read})
 			self.marc_record_id = marc_record.id
 		end
