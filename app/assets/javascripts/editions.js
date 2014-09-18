@@ -152,8 +152,40 @@ function appendProgressBar(key, number, field) {
   $(".progress").append("<div style='display: table-cell;float:left;'><div class='progress-bar' data-key='" + key + "' data-number='" + number + "' title='" + key + " in " + amount + " of " + sources + "' data-size='" + size + "' style='border-bottom-width:" + size + "px;'><span>" + field + "</span></div></div>");
 }
 
+function change_name(edition_id, name, ajax_url) {
+  var ajaxHash = {};
+  ajaxHash["name"] = name;
+  console.log(ajaxHash);
+  console.log(ajax_url);  
+  $.ajax({
+    url: ajax_url,
+    data: ajaxHash,
+    type: "POST",
+    dataType: "JSON"
+  }).success(function(json) {
+    console.log("log");
+  });
+}
+
 // document.ready
 $(function() {
+
+  // make name changeable in editions index view
+  $('.name').on('click', 'div', function () {
+          var input = $('<input/>', {'type': 'text', 'name': 'name', 'value': $(this).html() });
+          $(this).parent().append(input);
+          $(this).remove();
+          input.focus();
+      });
+
+      $('.name').on('blur', 'input', function () {
+          var ajax_url = $(this).parent().attr("ajax_path");
+          var name = $(this).val();
+          $(this).parent().append($('<div class="btn btn-mini" style="min-width: 20px;min-height:20px;"/>').html(name));
+          $(this).remove();
+          var edition_id = $(this).parent().data("id");
+          change_name(edition_id, name, ajax_url);
+      });
 
   $(".loading").remove();
   // codemirror for marc records

@@ -27,6 +27,7 @@ Mdmap::Application.routes.draw do
   resources :editions do
     member { get :map }
     member { post :save_best_match }
+    member { post :save_name }
   end
 
   resources :oclcs

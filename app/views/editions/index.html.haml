@@ -43,7 +43,9 @@
     - @editions.each do |edition|
       %tr
         %td= link_to edition.id, edition_path(edition)
-        %td= edition.name
+        %td.name{:data => {:edition => edition.id }, :ajax_path => save_name_edition_path(edition.id)}
+          .btn.btn-mini{:style=> "min-width:20px;min-height:20px;"}<
+            = edition.name
         %td
           - if edition.marc_record_id
             = link_to MarcRecord.find(edition.marc_record_id) do

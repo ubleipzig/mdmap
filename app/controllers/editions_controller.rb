@@ -174,4 +174,16 @@ class EditionsController < ApplicationController
     end
   end
 
+   def save_name
+      @edition = Edition.find(params[:id])
+  
+      name = params[:name]
+      @edition.name = name
+      @edition.save
+  
+      respond_to do |format|
+        format.json { render json: @edition }
+      end
+    end
+
 end
