@@ -41,14 +41,14 @@ class PerseusRecord < ActiveRecord::Base
 		# url = "http://catalog.perseus.org/catalog/" + urn  + "?format=atom"	
 		url = "http://data.perseus.org/catalog/" + urn  + "/atom"	
 		content = open url
-		self.mods = content
+		self.mods = content.force_encoding("UTF-8")
 	end
 
 	# def mods2marc(stylesheet_path = "lib/MODS2MARC21slim.xsl")
 	# def mods2marc(stylesheet_path = "lib/MODS3-4_MARC21slim_XSLT1-0.xsl")
 	def mods2marc(stylesheet_path = "lib/MODS3-4_MARC21slim_XSLT1-0_PERSEUSCATALOG.xsl")
 		xslt = Nokogiri::XSLT(File.read(stylesheet_path))
-		document = Nokogiri::XML(self.mods)
+		document = Nokogiri::XML(self.mods, nil, 'UTF-8')
 		# suppose, there is only one mods node per atom-feed
 		begin
 			node = document.xpath("//mods:mods")[0]
@@ -67,7 +67,7 @@ class PerseusRecord < ActiveRecord::Base
 			xml.remove_namespaces!
 			record = xml.xpath("//record")[0]
 			record.set_attribute("xmlns", "http://www.loc.gov/MARC21/slim")
-			m = MarcRecord.create :marc => xml.to_xml
+			m = MarcRecord.create :marc => xml.to_xml(:encoding => "UTF-8")
 			self.marc_record_id = m.id
 		else
 			false
