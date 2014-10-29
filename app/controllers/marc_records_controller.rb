@@ -149,17 +149,21 @@ class MarcRecordsController < ApplicationController
   def fincId
     query = params[:q]
     edition_id = params[:finc][:edition_id].to_i
-    link = "https://katalog.ub.uni-leipzig.de/Record/"
-    suffix = "/Export?style=MARCXML"
+    record = nil
+    link = "http://data.ub.uni-leipzig.de/marcxml/"
+    url = link + query
     source = "finc ID"
-    url = link + query + suffix
-    record = importWithId query, url, source
-    if record
-      f = FincRecord.create :url => query, :marc_record_id => record.id
-      Finc.create :edition_id => edition_id, :finc_record_id => f.id
-      redirect_to record, notice: "created MARCXML record from " + source + " " + query
+    if query == ""
+      redirect_to new_marc_record_path, alert: "No identifier provided"
     else
-      redirect_to new_marc_record_path, alert: "Could not find any metadata for given identifier"
+      record = importWithId query, url, source
+      if record
+        f = FincRecord.create :url => query, :marc_record_id => record.id
+        Finc.create :edition_id => edition_id, :finc_record_id => f.id
+        redirect_to record, notice: "created MARCXML record from " + source + " " + query
+      else
+        redirect_to new_marc_record_path, alert: "Could not find any metadata for given identifier"
+      end
     end
   end
 
